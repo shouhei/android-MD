@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MD</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_btn_add">新規作成</string>
+</resources>
