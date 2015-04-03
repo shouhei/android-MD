@@ -4,8 +4,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.*;
+import android.content.Intent;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.util.Log;
+
+import com.activeandroid.query.From;
+import com.activeandroid.query.Select;
+
+import java.util.List;
+
+
 
 
 public class MainActivity extends ActionBarActivity {
@@ -35,11 +44,27 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    private void contentAdd(){
-        Toast.makeText(MainActivity.this,"追加", Toast.LENGTH_LONG).show();
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<Text> texts = new Select().from(Text.class).execute();
         LinearLayout ll = (LinearLayout)this.findViewById(R.id.content);
-        TextView str = new TextView(this);
-        str.setText("added content");
-        ll.addView(str);
+        ll.removeAllViews();
+        for (Text text : texts) {
+            // 更新
+            TextView str = new TextView(this);
+            String[] lines = text.content.split("\n");
+            str.setText(lines[0]);
+            ll.addView(str);
+        }
+
+    }
+
+    private void contentAdd(){
+        Intent intent = new Intent();
+        intent.setClassName("com.example.shouhei.md", "com.example.shouhei.md.EditActivity");
+
+        // SubActivity の起動
+        startActivity(intent);
     }
 }

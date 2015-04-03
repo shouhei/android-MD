@@ -4,4 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_btn_add">新規作成</string>
+    <string name="action_btn_save">保存する</string>
+    <string name="can_use_markdown"></string>
+    <string name="title_activity_edit">EditActivity</string>
 </resources>
