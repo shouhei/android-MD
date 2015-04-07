@@ -5,14 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ArrayAdapter;
 import android.util.Log;
 
-import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 
 import java.util.List;
+import java.util.ArrayList;
 
 
 
@@ -47,16 +48,18 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        List<Text> texts = new Select().from(Text.class).execute();
-        LinearLayout ll = (LinearLayout)this.findViewById(R.id.content);
-        ll.removeAllViews();
+        List<Text> texts = new Select().from(Text.class).orderBy("id DESC").execute();
+        ListView lv = (ListView)this.findViewById(R.id.content);
+
+        List<SimpleData> objects = new ArrayList<SimpleData>();
         for (Text text : texts) {
             // 更新
-            TextView str = new TextView(this);
             String[] lines = text.content.split("\n");
-            str.setText(lines[0]);
-            ll.addView(str);
+            SimpleData item = new SimpleData(text.getId(), lines[0]);
+            objects.add(item);
         }
+        SimpleArrayAdapter adapter = new SimpleArrayAdapter(this, 0, objects);
+        lv.setAdapter(adapter);
 
     }
 

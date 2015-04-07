@@ -41,5 +41,6 @@ public class EditActivity extends ActionBarActivity {
         Text tx = new Text(content.getText().toString());
         tx.save();
         Toast.makeText(this, "保存しました", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

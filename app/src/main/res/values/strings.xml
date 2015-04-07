@@ -7,4 +7,5 @@
     <string name="action_btn_save">保存する</string>
     <string name="can_use_markdown"></string>
     <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_show">ShowActivity</string>
 </resources>
