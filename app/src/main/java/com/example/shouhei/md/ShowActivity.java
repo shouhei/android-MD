@@ -1,14 +1,17 @@
 package com.example.shouhei.md;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.webkit.WebView;
 import android.util.Log;
 
 import com.activeandroid.query.Select;
+
 import java.util.List;
+
+import com.commonsware.cwac.anddown.AndDown;
 
 public class ShowActivity extends ActionBarActivity {
 
@@ -19,8 +22,9 @@ public class ShowActivity extends ActionBarActivity {
         Bundle extras = getIntent().getExtras();
         List<Text> texts = new Select().from(Text.class).where("id = ?", extras.getLong("content_id")).orderBy("id DESC").execute();
         for(Text text : texts){
-            TextView lv = (TextView)this.findViewById(R.id.show);
-            lv.setText(text.content);
+            WebView lv = (WebView)this.findViewById(R.id.show);
+            AndDown prs = new AndDown();
+            lv.loadData(prs.markdownToHtml(text.content), "text/html", null);
         }
 
     }
